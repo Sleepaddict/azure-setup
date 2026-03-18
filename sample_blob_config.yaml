@@ -1,0 +1,19 @@
+logging:
+  type: syslog
+  level: log_debug
+
+components:
+  - libfuse
+  - file_cache
+  - attr_cache
+  - azstorage
+
+azstorage:
+  type: block
+  account-name: <storage-account-name>
+  container: <container-name>
+  account-key: <storage-account-key>
+
+file_cache:
+  path: /home/azureuser/blob_cache
+  timeout-sec: 120
