@@ -17,6 +17,7 @@ if __name__ == '__main__':
                         help='input data path e.g. your datastorage container subfolder e.g. azureml://datastores/<data_store_name>/paths/<path>/<training_dataset>')
     parser.add_argument('--outdatapath', type=str,
                         help='output data path e.g. your datastorage container subfolder e.g. azureml://datastores/<data_store_name>/paths/<path>/<training_artifacts>')
+    parser.add_argument('--weightsdatapath', type=str)
     parser.add_argument('--store_local', action='store_true',
                         help='whether to pre-download the dataset locally & store output artifacts locally first for faster I/O during training')
     parser.add_argument('--env', type=str,
@@ -59,6 +60,7 @@ if __name__ == '__main__':
             description="My custom conda environment",
             conda_file=args.env,
             image="mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04:latest"  # Let AML manage base image
+            # image="azureml:pytorch-2.4-cuda12.1@latest"
         )
     else:   
         # register docker image
@@ -82,6 +84,11 @@ if __name__ == '__main__':
         "input_data": Input(
             type=AssetTypes.URI_FOLDER,
             path=args.indatapath,
+            mode=IN_DATA_MODE
+        ),
+        'weights_data': Input(
+            type=AssetTypes.URI_FOLDER,
+            path=args.weightsdatapath,
             mode=IN_DATA_MODE
         )
     }
