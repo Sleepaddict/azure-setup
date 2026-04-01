@@ -72,7 +72,7 @@
     ```
 6) You can interact with your files via this compute instance terminal (e.g. unzip datasets, git clone repos) after the container has been mounted.
 7) BUT do not call your python scripts directly via the terminal. Submit them as a job instead (see `sample_submit_job.py` in next section) to fully utilize the created compute cluster (i.e. NOT compute instance).
-
+8) If you shutdown the compute instance, you will need to remove the existing ./blob_cache in the root directory and run the <blobfuse2 mount etc etc> cmd again when you boot it up again.<br>  
 ***Note***: you may encounter an error when submitting a job saying it could not get the managed credentials. To solve this, open up any python script/notebook, and you will be prompted to authenticate. Click on authenticate and you will be able to execute Azure ML SDK commands.
 
 ## Submitting Training Jobs using Custom Environment
@@ -95,6 +95,8 @@ There are 2 ways to do this.
     | --cmd | what you will usually call via cmd line e.g. "python train-model.py --your_args" ***see Note 3***|
     | --indatapath | input data path e.g. your datastorage container subfolder e.g. azureml://datastores/<data_store_name>/paths/<path>/<training_dataset> ***see Note 2***|
     | --outdatapath | output data path e.g. your datastorage container subfolder e.g. azureml://datastores/<data_store_name>/paths/<path>/<training_artifacts> ***see Note 2***|
+    | --weightsdatapath | weight folder path e.g. your datastorage container subfolder e.g. azureml://datastores/<data_store_name>/paths/<path>/<weights> ***see Note 2***|
+    | --out_data_mode | choices = [ 'we_decide', 'upload', 'rw_mount' ]<br>Choose 'upload' for faster io but outputs are only saved at the end.<br>Choose 'rw_mount' for immediate output.<br>Choose 'we_decide' to let the script auto select. |
     | --store_local | whether to pre-download the dataset locally & store output artifacts locally first for faster I/O during training ***see Note 1***|
     | --env | specifies the necessary packages/environment to use for running the command, or can be a yml file e.g. "my-custom-env:1" or "sample_env.yml" |
     | --env_name | name to use for your custom environment if any |
