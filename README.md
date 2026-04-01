@@ -72,7 +72,7 @@
     ```
 6) You can interact with your files via this compute instance terminal (e.g. unzip datasets, git clone repos) after the container has been mounted.
 7) BUT do not call your python scripts directly via the terminal. Submit them as a job instead (see `sample_submit_job.py` in next section) to fully utilize the created compute cluster (i.e. NOT compute instance).
-8) If you shutdown the compute instance, you will need to remove the existing ./blob_cache in the root directory and run the <blobfuse2 mount etc etc> cmd again when you boot it up again.<br>  
+8) If you shutdown the compute instance, you will need to remove the existing `~/blob_cache` and run the <blobfuse2 mount etc etc> cmd again when you boot it up.<br>  
 ***Note***: you may encounter an error when submitting a job saying it could not get the managed credentials. To solve this, open up any python script/notebook, and you will be prompted to authenticate. Click on authenticate and you will be able to execute Azure ML SDK commands.
 
 ## Submitting Training Jobs using Custom Environment
