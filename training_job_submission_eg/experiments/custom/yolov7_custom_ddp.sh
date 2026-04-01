@@ -6,7 +6,7 @@ HYP="$HYP_FULL"
 DATA_SETUP_CMD="$(custom_data_setup)" #takes from custom.sh
 # DDP config
 NUM_GPUS=2
-# You can overrride whatever configs are in coco.sh 
+# You can overrride whatever configs are in custom.sh 
 BATCH_SIZE=64
 EPOCHS=3
 IMG_SIZE="1280 1280"

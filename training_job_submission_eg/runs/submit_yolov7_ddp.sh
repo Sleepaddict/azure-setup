@@ -6,7 +6,7 @@
 #
 # Required env vars:
 #   CODE, SUBMIT_SCRIPT, ENV_FILE, ENV_NAME, COMPUTE
-#   IN_DATA_PATH, CFG, HYP, EPOCHS, BATCH_SIZE, IMG_SIZE, WORKERS, DEVICE
+#   IN_DATA_PATH, CFG, HYP, DATA, EPOCHS, BATCH_SIZE, IMG_SIZE, WORKERS, DEVICE
 #   DATA_SETUP_CMD (string containing the data path setup commands)
 #
 # Args:
@@ -35,7 +35,7 @@ CMD="${DATA_SETUP_CMD} && \\
 torchrun --nproc_per_node=${NUM_GPUS} --master_port=29500 train_equivariant.py \\
   --workers ${WORKERS} \\
   --batch-size ${BATCH_SIZE} \\
-  --data data/coco.yaml \\
+  --data ${DATA} \\
   --img-size ${IMG_SIZE} \\
   --cfg ${CFG} \\
   --name ${RUN_NAME} \\

@@ -9,7 +9,7 @@ IN_DATA_PATH="$(datastore_path "datasets/${DATASET_NAME}")"
 
 CFG="cfg/training/yolov7-tiny.yaml"
 HYP_FULL="data/hyp.scratch.tiny.yaml"
-
+DATA="data/custom_dataset.yaml"
 EPOCHS=600
 BATCH_SIZE=16
 IMG_SIZE="640 640"

@@ -7,7 +7,7 @@ IN_DATA_PATH="$(datastore_path 'datasets/coco')"
 
 CFG="cfg/training/yolov7-tiny.yaml"
 HYP_FULL="data/hyp.scratch.tiny.yaml"
-
+DATA="data/coco.yaml"
 EPOCHS=300
 BATCH_SIZE=32
 IMG_SIZE="640 640"
