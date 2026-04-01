@@ -17,9 +17,12 @@ if __name__ == '__main__':
                         help='input data path e.g. your datastorage container subfolder e.g. azureml://datastores/<data_store_name>/paths/<path>/<training_dataset>')
     parser.add_argument('--outdatapath', type=str,
                         help='output data path e.g. your datastorage container subfolder e.g. azureml://datastores/<data_store_name>/paths/<path>/<training_artifacts>')
-    parser.add_argument('--weightsdatapath', type=str)
+    parser.add_argument('--weightsdatapath', type=str,
+                        help='output data path e.g. your datastorage container subfolder e.g. azureml://datastores/<data_store_name>/paths/<path>/<weights>')
     parser.add_argument('--store_local', action='store_true',
                         help='whether to pre-download the dataset locally & store output artifacts locally first for faster I/O during training')
+    parser.add_argument('--out_data_mode', choices=['we_decide','upload', 'rw_mount'], default='rw_mount',
+                        help='the mode in which the job outputs will be written. rw_mount will save out immediately, upload will save out only at the end')
     parser.add_argument('--env', type=str,
                         help='specifies the necessary packages/environment to use for running the command, or can be a yml file e.g. "my-custom-env:1" or "sample_env.yml"')
     parser.add_argument('--env_name', type=str,
@@ -79,7 +82,10 @@ if __name__ == '__main__':
     # | Register data I/O for job |
     # +--------------------------+
     IN_DATA_MODE = "download" if args.store_local else "ro_mount"
-    OUT_DATA_MODE = "upload" if args.store_local else "rw_mount"
+    if args.out_data_mode == 'we_decide':
+        OUT_DATA_MODE = "upload" if args.store_local else "rw_mount"
+    else:
+        OUT_DATA_MODE = args.out_data_mode
     inputs = {
         "input_data": Input(
             type=AssetTypes.URI_FOLDER,
